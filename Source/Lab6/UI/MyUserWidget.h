@@ -20,7 +20,8 @@ public:
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
-	void DisplayPickupsLeft();
+	UFUNCTION(Server, Reliable)
+		void DisplayPickupsLeft();
 
 	int Team1;
 	int Team2;

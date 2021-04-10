@@ -74,6 +74,7 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	UPROPERTY(VisibleAnywhere, Replicated)
 	int numPickupsLeft = 5;
 
 	UPROPERTY(VisibleAnywhere, Replicated)
@@ -86,11 +87,5 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Materials")
 		class UMaterial* Team2Material;
-
-	UPROPERTY()
-		class UMyUserWidget* GameInfoWidget;
-
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<class UMyUserWidget> GameInfoBP;
 };
 

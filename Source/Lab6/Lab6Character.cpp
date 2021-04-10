@@ -19,6 +19,8 @@
 
 #include "Net/UnrealNetwork.h"
 #include "UI/MyUserWidget.h"
+
+#include "Lab6PlayerController.h"
 //////////////////////////////////////////////////////////////////////////
 // ALab6Character
 
@@ -57,19 +59,13 @@ ALab6Character::ALab6Character()
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
 	//SetReplicates(true);
-	GetMesh()->SetIsReplicated(true);	
+	//GetMesh()->SetIsReplicated(true);	
 }
 
 void ALab6Character::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (GameInfoBP != nullptr)
-	{
-		GameInfoWidget = CreateWidget<UMyUserWidget>(Cast<APlayerController>(GetController()), GameInfoBP);
-		GameInfoWidget->AddToViewport();
-	}
-
+	
 	if (GetLocalRole() > ROLE_AutonomousProxy)
 	{
 		PlayerTeam = GetWorld()->GetGameState()->AuthorityGameMode->GetNumPlayers();
@@ -182,13 +178,12 @@ void ALab6Character::NotifyActorBeginOverlap(AActor* OtherActor)
 		{
 			numPickupsLeft--;
 
+			pickup->Destroy();
+			
 			if (numPickupsLeft <= 0)
 			{
-				ALab6GameState* GS = Cast<ALab6GameState>(GetWorld()->GetGameState());
-				GS->Respawn();
+				Respawn();
 			}
-
-			pickup->Destroy();
 		}
 	}
 }
@@ -210,4 +205,5 @@ void ALab6Character::GetLifetimeReplicatedProps(TArray< FLifetimeProperty >& Out
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(ALab6Character, PlayerTeam);
+	DOREPLIFETIME(ALab6Character, numPickupsLeft);
 }

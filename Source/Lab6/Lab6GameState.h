@@ -18,4 +18,16 @@ public:
 	ALab6GameState();
 
 	void Respawn();
+
+	int GetTeam1PickupsLeft();
+	int GetTeam2PickupsLeft();
+
+	void SetTeam1PickupsLeft();
+	void SetTeam2PickupsLeft();
+
+	UPROPERTY(Replicated)
+		int Team1Pickups;
+
+	UPROPERTY(Replicated)
+		int Team2Pickups;
 };

@@ -7,7 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Pickup/PickupSpawner.h"
 #include "Pickup/PickupActor.h"
-
+#include "Lab6PlayerController.h"
 ALab6GameMode::ALab6GameMode()
 {
 	// set default pawn class to our Blueprinted character
@@ -17,6 +17,11 @@ ALab6GameMode::ALab6GameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 
+    static ConstructorHelpers::FClassFinder<APlayerController> PlayerControllerBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/BP_Lab6PlayerController"));
+    if (PlayerControllerBPClass.Class != NULL)
+    {
+        PlayerControllerClass = PlayerControllerBPClass.Class;
+    }
     //SetReplicates(true);
 }
 

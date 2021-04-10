@@ -32,8 +32,8 @@ public:
 protected:
 
 	int MaxPickups = 5;
-	float MaxPosRange = 1000.f;
-	float MinPosRange = -1000.f;
+	float MaxPosRange = 500.f;
+	float MinPosRange = -500.f;
 
 	FTimerHandle SpawnTimerHandler;
 };
